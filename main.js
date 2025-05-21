@@ -60,3 +60,33 @@ resetBtn.onclick = function () {
     count = 0;
     countLabel.textContent = count;
 }
+
+
+
+document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('.icon');
+
+        const isOpen = content.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.accordion-content').forEach(c => {
+            c.style.maxHeight = null;
+            c.classList.remove('open');
+        });
+        document.querySelectorAll('.accordion-header .icon').forEach(i => {
+            i.classList.remove('bi-dash-lg');
+            i.classList.add('bi-plus-lg');
+        });
+
+        // Open clicked one if not already open
+        if (!isOpen) {
+            content.classList.add('open');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            icon.classList.remove('bi-plus-lg');
+            icon.classList.add('bi-dash-lg');
+        }
+    });
+});
+
